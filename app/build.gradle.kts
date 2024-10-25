@@ -1,0 +1,115 @@
+plugins {
+    alias(libs.plugins.android.application.plugin)
+    alias(libs.plugins.kotlin.android.plugin)
+    alias(libs.plugins.kotlin.compose.plugin)
+    alias(libs.plugins.kotlin.serialization.plugin)
+    alias(libs.plugins.ksp.plugin)
+    alias(libs.plugins.dagger.hilt.android.plugin)
+}
+
+android {
+
+    namespace = "com.stoyanvuchev.cryptotracker"
+    compileSdk = 35
+
+    defaultConfig {
+
+        applicationId = "com.stoyanvuchev.cryptotracker"
+
+        minSdk = 27
+        targetSdk = 35
+
+        versionCode = 1
+        versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+
+        debug {
+
+            isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+
+        }
+
+        release {
+
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+
+        }
+
+    }
+
+    compileOptions {
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        jvmToolchain(17)
+    }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+
+}
+
+dependencies {
+
+    // Core Libs Bundle Implementation
+    implementation(libs.bundles.core)
+
+    // Lifecycle Libs Bundle Implementation
+    implementation(libs.bundles.lifecycle)
+
+    // Jetpack Compose BOM Bundle Implementation
+    implementation(libs.bundles.compose)
+    debugImplementation(libs.bundles.composeDebug)
+    androidTestImplementation(libs.bundles.composeAndroidTesting)
+
+    // Pagination Libs Bundle Implementation
+    implementation(libs.bundles.pagination)
+
+    // Dependency Injection Libs Bundle Implementation
+    implementation(libs.bundles.dependencyInjection)
+    ksp(libs.bundles.dependencyInjectionKsp)
+
+    // Local Storage Libs Bundle Implementation
+    implementation(libs.bundles.localStorage)
+    ksp(libs.bundles.localStorageKsp)
+
+    // Serialization Libs Bundle Implementation
+    implementation(libs.bundles.serialization)
+
+    // Networking Libs Bundle Implementation
+    implementation(libs.bundles.networking)
+
+    // Testing Libs Implementation
+    testImplementation(libs.bundles.unitTesting)
+    androidTestImplementation(libs.bundles.androidTesting)
+
+    // Other Libs Bundle Implementation
+    implementation(libs.bundles.other)
+
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
