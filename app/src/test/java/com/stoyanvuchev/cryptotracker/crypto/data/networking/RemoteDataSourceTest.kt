@@ -4,7 +4,7 @@ import assertk.assertThat
 import assertk.assertions.isNotNull
 import com.stoyanvuchev.cryptotracker.core.data.networking.HttpClientFactory
 import com.stoyanvuchev.cryptotracker.core.domain.util.Result
-import com.stoyanvuchev.cryptotracker.crypto.domain.networking.Coin
+import com.stoyanvuchev.cryptotracker.crypto.data.local.entity.CoinEntity
 import com.stoyanvuchev.cryptotracker.crypto.domain.networking.RemoteDataSource
 import io.ktor.client.engine.cio.CIO
 import kotlinx.coroutines.test.runTest
@@ -25,7 +25,7 @@ class RemoteDataSourceTest {
     fun `Fetch all coins with no exception`() = runTest {
 
         val result = remoteDataSource.getCoins()
-        var coins: List<Coin>? = null
+        var coins: List<CoinEntity>? = null
 
         when (result) {
 
