@@ -1,4 +1,4 @@
-package com.stoyanvuchev.cryptotracker.core.ui.theme
+package com.stoyanvuchev.cryptotracker.core.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
