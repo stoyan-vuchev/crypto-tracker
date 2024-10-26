@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.stoyanvuchev.cryptotracker.R
-import com.stoyanvuchev.cryptotracker.core.ui.theme.CryptoTrackerTheme
+import com.stoyanvuchev.cryptotracker.core.presentation.theme.CryptoTrackerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
