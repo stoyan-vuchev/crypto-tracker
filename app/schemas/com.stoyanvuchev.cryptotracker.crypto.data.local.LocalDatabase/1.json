@@ -2,12 +2,18 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1868d39b3637856700375cab0b45af0e",
+    "identityHash": "c7b812e908db9667c66cca609029784b",
     "entities": [
       {
         "tableName": "coin_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`askPrice` TEXT NOT NULL, `askQty` TEXT NOT NULL, `bidPrice` TEXT NOT NULL, `bidQty` TEXT NOT NULL, `closeTime` INTEGER NOT NULL, `count` INTEGER NOT NULL, `firstId` INTEGER NOT NULL, `highPrice` TEXT NOT NULL, `lastId` INTEGER NOT NULL, `lastPrice` TEXT NOT NULL, `lastQty` TEXT NOT NULL, `lowPrice` TEXT NOT NULL, `openPrice` TEXT NOT NULL, `openTime` INTEGER NOT NULL, `prevClosePrice` TEXT NOT NULL, `priceChange` TEXT NOT NULL, `priceChangePercent` TEXT NOT NULL, `quoteVolume` TEXT NOT NULL, `symbol` TEXT NOT NULL, `volume` TEXT NOT NULL, `weightedAvgPrice` TEXT NOT NULL, PRIMARY KEY(`symbol`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `askPrice` TEXT NOT NULL, `askQty` TEXT NOT NULL, `bidPrice` TEXT NOT NULL, `bidQty` TEXT NOT NULL, `closeTime` INTEGER NOT NULL, `count` INTEGER NOT NULL, `firstId` INTEGER NOT NULL, `highPrice` TEXT NOT NULL, `lastId` INTEGER NOT NULL, `lastPrice` TEXT NOT NULL, `lastQty` TEXT NOT NULL, `lowPrice` TEXT NOT NULL, `openPrice` TEXT NOT NULL, `openTime` INTEGER NOT NULL, `prevClosePrice` TEXT NOT NULL, `priceChange` TEXT NOT NULL, `priceChangePercent` TEXT NOT NULL, `quoteVolume` TEXT NOT NULL, `symbol` TEXT NOT NULL, `volume` TEXT NOT NULL, `weightedAvgPrice` TEXT NOT NULL)",
         "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
           {
             "fieldPath": "askPrice",
             "columnName": "askPrice",
@@ -136,9 +142,9 @@
           }
         ],
         "primaryKey": {
-          "autoGenerate": false,
+          "autoGenerate": true,
           "columnNames": [
-            "symbol"
+            "id"
           ]
         },
         "indices": [],
@@ -148,7 +154,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1868d39b3637856700375cab0b45af0e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c7b812e908db9667c66cca609029784b')"
     ]
   }
 }

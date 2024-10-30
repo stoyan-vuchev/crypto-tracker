@@ -16,9 +16,9 @@ import kotlin.coroutines.coroutineContext
  * @return A [Result] containing either the parsed body of type [T] on success, or a [NetworkError] on failure.
  *
  * This function handles the following exceptions:
- * - **UnresolvedAddressException**: Returns a [NetworkError.NO_INTERNET] error, indicating no network connection.
- * - **SerializationException**: Returns a [NetworkError.SERIALIZATION] error, indicating a failure in data serialization.
- * - **Other Exceptions**: Returns a [NetworkError.UNKNOWN] error if an unexpected exception occurs.
+ * - **UnresolvedAddressException**: Returns a [NetworkError.NoInternet] error, indicating no network connection.
+ * - **SerializationException**: Returns a [NetworkError.Serialization] error, indicating a failure in data serialization.
+ * - **Other Exceptions**: Returns a [NetworkError.Unknown] error if an unexpected exception occurs.
  *
  * If the HTTP call succeeds, the response is passed to [responseToResult] for status-based handling.
  * The function also checks the coroutine's active state to avoid continuing if the coroutine is canceled.
@@ -30,12 +30,12 @@ suspend inline fun <reified T> safeCall(
     val response = try {
         execute()
     } catch (e: UnresolvedAddressException) {
-        return Result.Error(NetworkError.NO_INTERNET)
+        return Result.Error(NetworkError.NoInternet)
     } catch (e: SerializationException) {
-        return Result.Error(NetworkError.SERIALIZATION)
+        return Result.Error(NetworkError.Serialization)
     } catch (e: Exception) {
         coroutineContext.ensureActive()
-        return Result.Error(NetworkError.UNKNOWN)
+        return Result.Error(NetworkError.Unknown)
     }
 
     return responseToResult(response)

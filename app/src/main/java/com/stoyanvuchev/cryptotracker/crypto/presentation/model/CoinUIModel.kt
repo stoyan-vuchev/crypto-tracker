@@ -1,12 +1,10 @@
-package com.stoyanvuchev.cryptotracker.crypto.data.local.entity
+package com.stoyanvuchev.cryptotracker.crypto.presentation.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.compose.runtime.Stable
 
-@Entity(tableName = "coin_table")
-data class CoinEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+@Stable
+data class CoinUIModel(
+    val id: Int,
     val askPrice: String,
     val askQty: String,
     val bidPrice: String,

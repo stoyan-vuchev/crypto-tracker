@@ -1,6 +1,7 @@
-package com.stoyanvuchev.cryptotracker.crypto.domain.networking
+package com.stoyanvuchev.cryptotracker.crypto.domain.model
 
 data class Coin(
+    val id: Int,
     val askPrice: String,
     val askQty: String,
     val bidPrice: String,
