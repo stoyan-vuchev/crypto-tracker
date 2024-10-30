@@ -1,5 +1,8 @@
 package com.stoyanvuchev.cryptotracker.presentation.navigation
 
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -13,7 +16,9 @@ fun AppNavigationHost(
 
     NavHost(
         navController = navHostController,
-        startDestination = CryptoScreens.CryptoNavigationGraph
+        startDestination = CryptoScreens.CryptoNavigationGraph,
+        enterTransition = { fadeIn(animationSpec = spring()) },
+        exitTransition = { fadeOut(animationSpec = spring()) }
     ) {
 
         cryptoScreensNavigationGraph(

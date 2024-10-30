@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.CryptoTracker" parent="android:Theme.DeviceDefault.NoActionBar" />
+    <style name="Theme.CryptoTracker" parent="Theme.Material3.DayNight.NoActionBar" />
 
 </resources>

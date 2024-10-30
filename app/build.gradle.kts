@@ -90,6 +90,7 @@ dependencies {
 
     // Core Libs Bundle Implementation
     implementation(libs.bundles.core)
+    implementation(libs.google.material)
 
     // Lifecycle Libs Bundle Implementation
     implementation(libs.bundles.lifecycle)

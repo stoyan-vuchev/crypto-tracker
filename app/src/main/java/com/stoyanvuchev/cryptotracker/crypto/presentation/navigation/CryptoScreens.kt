@@ -12,4 +12,7 @@ object CryptoScreens {
     @Serializable
     object CoinsListScreen : Screen()
 
+    @Serializable
+    data class CoinDetailsScreen(val symbol: String) : Screen()
+
 }
