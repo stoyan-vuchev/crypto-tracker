@@ -1,12 +1,12 @@
 package com.stoyanvuchev.cryptotracker.crypto.data.local.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity(
-    tableName = "coin_table",
-    primaryKeys = ["symbol"]
-)
+@Entity(tableName = "coin_table")
 data class CoinEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
     val askPrice: String,
     val askQty: String,
     val bidPrice: String,

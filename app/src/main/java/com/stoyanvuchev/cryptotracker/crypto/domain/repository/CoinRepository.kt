@@ -2,7 +2,7 @@ package com.stoyanvuchev.cryptotracker.crypto.domain.repository
 
 import com.stoyanvuchev.cryptotracker.core.domain.util.Error
 import com.stoyanvuchev.cryptotracker.core.domain.util.Result
-import com.stoyanvuchev.cryptotracker.crypto.domain.networking.Coin
+import com.stoyanvuchev.cryptotracker.crypto.domain.model.Coin
 
 /**
  * Repository interface for fetching coin data.
@@ -12,7 +12,7 @@ import com.stoyanvuchev.cryptotracker.crypto.domain.networking.Coin
 interface CoinRepository {
 
     /**
-     * Retrieves a list of all coins.
+     * Retrieves all coins.
      *
      * This method returns either a successful result containing a list of [Coin] objects or an error
      * if the data cannot be fetched.

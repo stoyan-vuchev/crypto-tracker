@@ -9,7 +9,7 @@ import com.stoyanvuchev.cryptotracker.core.domain.util.Result
 import com.stoyanvuchev.cryptotracker.crypto.data.local.LocalDatabase
 import com.stoyanvuchev.cryptotracker.crypto.data.local.LocalDatabaseFactory
 import com.stoyanvuchev.cryptotracker.crypto.data.networking.RemoteDataSourceImpl
-import com.stoyanvuchev.cryptotracker.crypto.domain.networking.Coin
+import com.stoyanvuchev.cryptotracker.crypto.domain.model.Coin
 import com.stoyanvuchev.cryptotracker.crypto.domain.networking.RemoteDataSource
 import com.stoyanvuchev.cryptotracker.crypto.domain.repository.CoinRepository
 import io.ktor.client.engine.cio.CIO

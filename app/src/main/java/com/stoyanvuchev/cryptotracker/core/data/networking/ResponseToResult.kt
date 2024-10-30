@@ -14,11 +14,11 @@ import io.ktor.client.statement.HttpResponse
  * @return A [Result] containing either the parsed body of type [T] on success, or a [NetworkError] on failure.
  *
  * - **2xx (Success)**: Attempts to parse the response body as type [T]. If deserialization fails,
- *   a [NetworkError.SERIALIZATION] error is returned.
- * - **408 (Request Timeout)**: Returns a [NetworkError.REQUEST_TIMEOUT] error.
- * - **429 (Too Many Requests)**: Returns a [NetworkError.TOO_MANY_REQUESTS] error.
- * - **5xx (Server Error)**: Returns a [NetworkError.SERVER_ERROR] error.
- * - **Other Status Codes**: Returns a [NetworkError.UNKNOWN] error.
+ *   a [NetworkError.Serialization] error is returned.
+ * - **408 (Request Timeout)**: Returns a [NetworkError.RequestTimeout] error.
+ * - **429 (Too Many Requests)**: Returns a [NetworkError.TooManyRequests] error.
+ * - **5xx (Server Error)**: Returns a [NetworkError.ServerError] error.
+ * - **Other Status Codes**: Returns a [NetworkError.Unknown] error.
  *
  * @throws NoTransformationFoundException if the response body cannot be transformed into type [T].
  */
@@ -31,17 +31,17 @@ suspend inline fun <reified T> responseToResult(
             try {
                 Result.Success(response.body<T>())
             } catch (e: NoTransformationFoundException) {
-                Result.Error(NetworkError.SERIALIZATION)
+                Result.Error(NetworkError.Serialization)
             }
         }
 
-        408 -> Result.Error(NetworkError.REQUEST_TIMEOUT)
+        408 -> Result.Error(NetworkError.RequestTimeout)
 
-        429 -> Result.Error(NetworkError.TOO_MANY_REQUESTS)
+        429 -> Result.Error(NetworkError.TooManyRequests)
 
-        in 500..599 -> Result.Error(NetworkError.SERVER_ERROR)
+        in 500..599 -> Result.Error(NetworkError.ServerError)
 
-        else -> Result.Error(NetworkError.UNKNOWN)
+        else -> Result.Error(NetworkError.Unknown)
 
     }
 }

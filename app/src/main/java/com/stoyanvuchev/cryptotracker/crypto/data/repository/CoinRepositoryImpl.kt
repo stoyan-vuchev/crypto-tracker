@@ -5,7 +5,7 @@ import com.stoyanvuchev.cryptotracker.core.domain.util.Error
 import com.stoyanvuchev.cryptotracker.core.domain.util.Result
 import com.stoyanvuchev.cryptotracker.crypto.data.local.LocalDatabaseDao
 import com.stoyanvuchev.cryptotracker.crypto.data.mappers.toCoin
-import com.stoyanvuchev.cryptotracker.crypto.domain.networking.Coin
+import com.stoyanvuchev.cryptotracker.crypto.domain.model.Coin
 import com.stoyanvuchev.cryptotracker.crypto.domain.networking.RemoteDataSource
 import com.stoyanvuchev.cryptotracker.crypto.domain.repository.CoinRepository
 
@@ -36,7 +36,7 @@ class CoinRepositoryImpl(
     override suspend fun getAllCoins(): Result<List<Coin>, Error> {
         return try {
 
-            val coinsList = localDatabaseDao.getAllCoins()
+            val coinsList = localDatabaseDao.getPaginatedCoins()
             if (!coinsList.isNullOrEmpty()) {
 
                 Result.Success(coinsList.map { it.toCoin() })
@@ -49,11 +49,11 @@ class CoinRepositoryImpl(
 
                         localDatabaseDao.insertCoins(result.data)
 
-                        val newCoins = localDatabaseDao.getAllCoins()
+                        val newCoins = localDatabaseDao.getPaginatedCoins()
                         if (!newCoins.isNullOrEmpty()) {
                             Result.Success(newCoins.map { it.toCoin() })
                         } else {
-                            Result.Error(CoinRepositoryError.COIN_DATA_UNAVAILABLE)
+                            Result.Error(CoinRepositoryError.Unknown)
                         }
 
                     }
@@ -65,7 +65,7 @@ class CoinRepositoryImpl(
             }
 
         } catch (e: Exception) {
-            Result.Error(CoinRepositoryError.UNKNOWN)
+            Result.Error(CoinRepositoryError.Unknown)
         }
     }
 
@@ -84,10 +84,10 @@ class CoinRepositoryImpl(
             if (coinEntity != null) {
                 Result.Success(coinEntity.toCoin())
             } else {
-                Result.Error(CoinRepositoryError.COIN_DATA_UNAVAILABLE)
+                Result.Error(CoinRepositoryError.Unknown)
             }
         } catch (e: Exception) {
-            Result.Error(CoinRepositoryError.UNKNOWN)
+            Result.Error(CoinRepositoryError.Unknown)
         }
     }
 

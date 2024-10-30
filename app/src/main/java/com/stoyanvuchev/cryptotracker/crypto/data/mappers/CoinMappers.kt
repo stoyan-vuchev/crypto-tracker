@@ -2,7 +2,7 @@ package com.stoyanvuchev.cryptotracker.crypto.data.mappers
 
 import com.stoyanvuchev.cryptotracker.crypto.data.local.entity.CoinEntity
 import com.stoyanvuchev.cryptotracker.crypto.data.networking.dto.CoinDto
-import com.stoyanvuchev.cryptotracker.crypto.domain.networking.Coin
+import com.stoyanvuchev.cryptotracker.crypto.domain.model.Coin
 
 /**
  * Converts a [CoinDto] data transfer object to a [CoinEntity] local database entity.
@@ -48,6 +48,7 @@ fun CoinDto.toCoinEntity(): CoinEntity {
  */
 fun CoinEntity.toCoin(): Coin {
     return Coin(
+        id = id ?: 1,
         askPrice = askPrice,
         askQty = askQty,
         bidPrice = bidPrice,

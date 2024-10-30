@@ -34,7 +34,7 @@ class LocalDatabaseTest {
         val expected = givenCoins
         localDatabase.dao.insertCoins(expected)
 
-        val actual = localDatabase.dao.getAllCoins()
+        val actual = localDatabase.dao.getPaginatedCoins()
         assertThat(actual).isEqualTo(expected)
 
     }
@@ -56,7 +56,7 @@ class LocalDatabaseTest {
         localDatabase.dao.insertCoins(givenCoins)
         localDatabase.dao.deleteAllCoins()
 
-        val actual = localDatabase.dao.getAllCoins()
+        val actual = localDatabase.dao.getPaginatedCoins()
         assertThat(actual).isNullOrEmpty()
 
     }

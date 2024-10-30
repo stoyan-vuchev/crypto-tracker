@@ -25,12 +25,12 @@ interface LocalDatabaseDao {
     suspend fun insertCoins(coins: List<CoinEntity>)
 
     /**
-     * Retrieves all [CoinEntity] records from the `coin_table`.
+     * Retrieves a list of [CoinEntity] records from the `coin_table`.
      *
-     * @return A list of [CoinEntity] entities, or `null` if the table is empty.
+     * @return A list of [CoinEntity] entities.
      */
-    @Query("SELECT * FROM coin_table")
-    suspend fun getAllCoins(): List<CoinEntity>?
+    @Query("SELECT * FROM coin_table ORDER BY id ASC")
+    suspend fun getPaginatedCoins(): List<CoinEntity>?
 
     /**
      * Retrieves a single [CoinEntity] by its symbol.
