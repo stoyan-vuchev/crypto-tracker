@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application.plugin)
     alias(libs.plugins.kotlin.android.plugin)
@@ -23,6 +25,13 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            gradleLocalProperties(rootDir, providers).getProperty("base.url") as String
+        )
 
     }
 
@@ -69,12 +78,19 @@ android {
         buildConfig = true
     }
 
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
 }
 
 dependencies {
 
     // Core Libs Bundle Implementation
     implementation(libs.bundles.core)
+    implementation(libs.google.material)
 
     // Lifecycle Libs Bundle Implementation
     implementation(libs.bundles.lifecycle)

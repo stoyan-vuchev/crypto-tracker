@@ -1,4 +1,4 @@
-package com.stoyanvuchev.cryptotracker.core.ui.theme
+package com.stoyanvuchev.cryptotracker.core.presentation.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

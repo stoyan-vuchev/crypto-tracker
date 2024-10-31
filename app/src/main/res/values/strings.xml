@@ -1,3 +1,17 @@
 <resources>
+
+    <!-- App -->
     <string name="app_name">Crypto Tracker</string>
+
+    <!-- Network Error -->
+    <string name="network_error_request_timeout">Connection timed out.\nCheck your connection.</string>
+    <string name="network_error_too_many_requests">You\'ve reached the request limit.\nPlease wait a bit.</string>
+    <string name="network_error_no_internet">No internet connection.\nPlease check your connection.</string>
+    <string name="network_error_server_error">Server error encountered.\nPlease wait a bit and try again.</string>
+    <string name="network_error_serialization">Something went wrong while processing the data.</string>
+    <string name="network_error_unknown">Something went wrong.\nPlease try again.</string>
+
+    <!-- Coin Repository Error -->
+    <string name="coin_repository_error_unknown">Something went wrong.</string>
+
 </resources>
