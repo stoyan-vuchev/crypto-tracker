@@ -1,7 +1,8 @@
 package com.stoyanvuchev.cryptotracker.crypto.data.repository
 
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import assertk.assertThat
 import assertk.assertions.isNotNull
 import com.stoyanvuchev.cryptotracker.core.data.networking.HttpClientFactory
@@ -9,8 +10,10 @@ import com.stoyanvuchev.cryptotracker.core.domain.util.Result
 import com.stoyanvuchev.cryptotracker.crypto.data.local.LocalDatabase
 import com.stoyanvuchev.cryptotracker.crypto.data.local.LocalDatabaseFactory
 import com.stoyanvuchev.cryptotracker.crypto.data.networking.RemoteDataSourceImpl
+import com.stoyanvuchev.cryptotracker.crypto.data.preferences.CryptoPreferencesImpl
 import com.stoyanvuchev.cryptotracker.crypto.domain.model.Coin
 import com.stoyanvuchev.cryptotracker.crypto.domain.networking.RemoteDataSource
+import com.stoyanvuchev.cryptotracker.crypto.domain.preferences.cryptoPreferences
 import com.stoyanvuchev.cryptotracker.crypto.domain.repository.CoinRepository
 import io.ktor.client.engine.cio.CIO
 import kotlinx.coroutines.test.runTest
@@ -32,12 +35,15 @@ class CoinRepositoryTest {
         val httpClient = HttpClientFactory.createInstance(CIO.create())
         remoteDataSource = RemoteDataSourceImpl(httpClient)
 
-        val context = InstrumentationRegistry.getInstrumentation().context
+        val context = ApplicationProvider.getApplicationContext<Context>().applicationContext
         localDatabase = LocalDatabaseFactory.createInMemoryInstance(context)
+
+        val cryptoPreferences = CryptoPreferencesImpl(context.cryptoPreferences)
 
         coinRepository = CoinRepositoryImpl(
             remoteDataSource = remoteDataSource,
-            localDatabaseDao = localDatabase.dao
+            localDatabaseDao = localDatabase.dao,
+            cryptoPreferences = cryptoPreferences
         )
 
     }

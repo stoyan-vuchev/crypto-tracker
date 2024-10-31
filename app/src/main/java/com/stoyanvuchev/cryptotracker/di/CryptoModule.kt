@@ -5,8 +5,11 @@ import com.stoyanvuchev.cryptotracker.core.data.networking.HttpClientFactory
 import com.stoyanvuchev.cryptotracker.crypto.data.local.LocalDatabase
 import com.stoyanvuchev.cryptotracker.crypto.data.local.LocalDatabaseFactory
 import com.stoyanvuchev.cryptotracker.crypto.data.networking.RemoteDataSourceImpl
+import com.stoyanvuchev.cryptotracker.crypto.data.preferences.CryptoPreferencesImpl
 import com.stoyanvuchev.cryptotracker.crypto.data.repository.CoinRepositoryImpl
 import com.stoyanvuchev.cryptotracker.crypto.domain.networking.RemoteDataSource
+import com.stoyanvuchev.cryptotracker.crypto.domain.preferences.CryptoPreferences
+import com.stoyanvuchev.cryptotracker.crypto.domain.preferences.cryptoPreferences
 import com.stoyanvuchev.cryptotracker.crypto.domain.repository.CoinRepository
 import dagger.Module
 import dagger.Provides
@@ -23,6 +26,16 @@ object CryptoModule {
 
     @Provides
     @Singleton
+    fun provideCryptoPreferences(
+        @ApplicationContext context: Context
+    ): CryptoPreferences {
+        return CryptoPreferencesImpl(
+            preferences = context.cryptoPreferences
+        )
+    }
+
+    @Provides
+    @Singleton
     fun provideHttpClient(): HttpClient {
         return HttpClientFactory.createInstance(CIO.create())
     }
@@ -35,19 +48,24 @@ object CryptoModule {
 
     @Provides
     @Singleton
-    fun provideLocalDatabase(@ApplicationContext context: Context): LocalDatabase {
-        return LocalDatabaseFactory.createPersistentInstance(context)
+    fun provideLocalDatabase(
+        @ApplicationContext context: Context
+    ): LocalDatabase {
+        return LocalDatabaseFactory
+            .createPersistentInstance(context)
     }
 
     @Provides
     @Singleton
     fun provideCoinRepository(
         remoteDataSource: RemoteDataSource,
-        localDatabase: LocalDatabase
+        localDatabase: LocalDatabase,
+        cryptoPreferences: CryptoPreferences
     ): CoinRepository {
         return CoinRepositoryImpl(
             remoteDataSource = remoteDataSource,
-            localDatabaseDao = localDatabase.dao
+            localDatabaseDao = localDatabase.dao,
+            cryptoPreferences = cryptoPreferences
         )
     }
 
